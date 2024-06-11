@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
-    <title>Text Summarizer</title>
+    <title>Summarized Text</title>
     <style>
        *{
         margin: 0;
@@ -59,15 +59,34 @@
         box-shadow: 0 0 20px #eee;
         border-radius: 10px;
         display: block;
-       
+        text-decoration: none; /* Remove underline */
+        cursor: pointer; /* Add cursor pointer */
       }
 
       .btn-grad:hover {
         background-position: right center; /* change the direction of the change here */
         color: #fff;
-        text-decoration: none;
       }
-     
+
+      .btn-download {
+        background-image: linear-gradient(to right, #005C97 0%, #363795 51%, #005C97 100%);
+            margin: 10px;
+            padding: 15px 45px;
+            text-align: center;
+            text-transform: capitalize;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+      }
+
+      .btn-download:hover {
+        background-position: right center;
+            color: #fff;
+            text-decoration: none;
+      }
 
       .summary {
         width: 100%;
@@ -99,17 +118,16 @@
         gap:4rem;
       }
       
-   .header__text{
-    color: #fff;
-    font-size: 32px;
-   }
-
+      .header__text{
+        color: #fff;
+        font-size: 32px;
+      }
     </style>
   </head>
 <body>
     <div class="header">
-        <img class="header__img" src="./static/logo.png" alt="">
-        <h1 class="header__text">TextTonic</h1>
+        <img class="header__img" src="/static/Final logo.png" alt="">
+        <h1 class="header__text">Elevate your text-game, always!</h1>
     </div>
     <div class="container" >
       <div class="container__left">
@@ -126,7 +144,17 @@
         <h2 class="summary__text">Summary</h2>
         <br>
         <p id="summaryText" style="text-align:justify">{{ summarized_text }}</p>
+      <br>
+      <p><b>Final Word Count : {{ final_word_count }}</b></p>
+      <br>
+      <audio controls>
+        <source src="{{ url_for('static', filename=temp_filename) }}" type="audio/mp3">
+        Your browser does not support the audio element.
+      </audio>
+        <div class="button_group">
+          <a href="{{ url_for('download_summary', input_text=input_text, max_summary_sentences=max_summary_sentences) }}" class="btn-download">Download Summarized Text</a>
+        </div>
     </div>
-</div>
+  </div>
 </body>
 </html>
