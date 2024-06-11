@@ -1,130 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
-    <title>Text Summarizer</title>
+    <title>Text Tonic</title>
     <style>
-       *{
-        margin: 0;
-        padding: 0;
-       } 
-      body {
-        font-family: Lato, sans-serif; 
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
+        * {
+            margin: 0;
+            padding: 0;
+        }
 
-      .header {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap:1.5rem;
-        background:linear-gradient(to right, #004e92    50%, #000428  100%);
-        margin: 10px;
-        padding-block:10px;
-      }
+        body {
+            font-family: Lato, sans-serif;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
 
-      .container-fluid {
-       display: flex;
-       flex-direction: column;
-       gap:1.5rem;
-       width: 100%;
-      }
+        .header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1.5rem;
+            background: linear-gradient(to right, #004e92 50%, #000428 100%);
+            margin: 10px;
+            padding-block: 10px;
+        }
 
-      .form__label {
-        font-size: 20px;
-      }
+        .header__img{
+            height: 50px;
+            width: 200px;
+            margin-left: 10px;
+          }
+    
+        .container-fluid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: 100%;
+        }
+        .container__right {
+            width: 45%;
+        }
+        .container__right h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
 
-      .form__text{
-        height: 200px;
-        padding: 10px;
-        font-size: 16px;
-        border: 1px solid darkslategray;
-        border-radius: 5px;
-        resize: none;
-        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-        min-height: 60vh;
-      }
+        .form__text {
+            height: 200px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid darkslategray;
+            border-radius: 5px;
+            resize: none;
+            box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+            min-height: 60vh;
+        }
 
-      .btn-grad {
-        background-image: linear-gradient(to right, #005C97 0%, #363795  51%, #005C97  100%);
-        margin: 10px;
-        padding: 15px 45px;
-        text-align: center;
-        text-transform: uppercase;
-        transition: 0.5s;
-        background-size: 200% auto;
-        color: white;            
-        box-shadow: 0 0 20px #eee;
-        border-radius: 10px;
-        display: block;
-       
-      }
+        .btn-grad {
+            background-image: linear-gradient(to right, #005C97 0%, #363795 51%, #005C97 100%);
+            margin: 10px;
+            padding: 15px 45px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+        }
 
-      .btn-grad:hover {
-        background-position: right center; /* change the direction of the change here */
-        color: #fff;
-        text-decoration: none;
-      }
-     
+        .btn-grad:hover {
+            background-position: right center;
+            color: #fff;
+            text-decoration: none;
+        }
 
-  
+        .container {
+            display: flex;
+            justify-content: space-between;
+            gap: 3rem;
+            padding: 20px;
+        }
 
-      .summary {
-        width: 100%;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-        padding: 1rem;
-        min-height: 70vh
-      }
+        .container__left {
+            width: 100%;
+        }
 
-      .header__img{
-        height: 50px;
-        width: 200px;
-        margin-left: 10px;
-      }
+        .button_group {
+            display: flex;
+            flex-direction: row;
+            gap: 4rem;
+        }
 
+        .header__text {
+            color: #fff;
+            font-size: 32px;
+        }
 
-      .container{
-        display: flex;
-        justify-content: space-between;
-        gap:3rem;
-        padding: 20px;
-      }
-      .container__left{
-        width: 100%;
-      }
-
-      .button_group{
-        display: flex;
-        flex-direction: row;
-        gap:4rem;
-      }
-      
-   .header__text{
-    color: #fff;
-    font-size: 32px;
-   }
+        .word_count {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .meaning-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .meaning-list li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .form__input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 70%; /* Adjust the width as needed */
+        }
 
     </style>
-  </head>
-  <body>
-    <div class="header">
-      <img class="header__img" src="logo.png" alt="">
-      <h1 class="header__text">TextTonic</h1>
-    </div>
-   <div class="container" >
-      <div class="container__left">
-        <form method="POST" action="/summarize_text">
-            <div class="container-fluid">
-              <!-- <label for="text" class="form__label">Enter summarize:</label> -->
-              <textarea id="link" class="form__text" name="input_text" placeholder="Text Here to summarize..."></textarea>
-         <div class="button_group">
-            <button type="submit" class="btn-grad ">Summarize</button>
-         </div>
-        </div>
-          </form>
-      </div>
+</head>
+<body>
+<div class="header">
+    <img class="header__img" src="/static/Final logo.png" alt="">
+    <h1 class="header__text">Elevate your text-game, always!</h1>
 </div>
+<div class="container">
+    <div class="container__left">
+        <form id="summarize_form" method="POST" action="/summarize_text">
+            <div class="container-fluid">
+                <textarea id="input_text" class="form__text" name="input_text" placeholder="Text Here to summarize..." oninput="updateWordCount(this.value)"></textarea>
+                <p class="word_count">Total Word Count: <span id="word_count_display">0</span></p>
+                <div class="button_group">
+                    <button type="submit" class="btn-grad">summarize</button>
+
+                   </div>
+            </div>
+        </form>
+        
+        <!-- Paraphrase Form -->
+        <form id="paraphrase_form" method="POST" action="/paraphrase_form">
+            <div class="container-fluid">
+                <textarea id="input_text_paraphrase" class="form__text" name="input_text_paraphrase" placeholder="Text Here to paraphrase..." ></textarea>
+                <div class="button_group">
+                    <button type="submit" class="btn-grad">paraphrase</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="container__right">
+        <h2>DICTIONARY</h2>
+        <form method="post">
+            <div class="container-fluid">
+                <input type="text" name="word" class="form__input" placeholder="Enter a word">
+                <button type="submit" class="btn-grad">Lookup</button>
+            </div>
+        </form>
+        <br>
+        {% if meanings %}
+        <div class="meaning-container">
+            <h3>Meaning:</h3>
+            <br>
+            <ul class="meaning-list">
+                {% for word, meanings_list in meanings.items() %}
+                    <li>
+                        <ul>
+                            {% for meaning in meanings_list %} 
+                                <li>{{ meaning }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+  
+</div>
+
+<script>
+    function updateWordCount(text) {
+        const wordCount = text.trim().split(/\s+/).length;
+        document.getElementById('word_count_display').textContent = wordCount;
+    }
+</script>
+
 </body>
 </html>
